@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aplicativo de gerenciamento de tarefas com tema escuro e design elegante.">
+    <title>TaskFlow — Gerenciador de Tarefas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            background-color: #0f172a;
+            color: #f1f5f9;
+            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated background orbs */
+        .bg-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+            animation: float 20s ease-in-out infinite alternate;
+        }
+        .bg-orb-1 {
+            width: 500px; height: 500px;
+            background: #0ea5e9;
+            top: -10%; left: -10%;
+            animation-duration: 22s;
+        }
+        .bg-orb-2 {
+            width: 400px; height: 400px;
+            background: #10b981;
+            bottom: -10%; right: -10%;
+            animation-duration: 18s;
+            animation-delay: -5s;
+        }
+        .bg-orb-3 {
+            width: 300px; height: 300px;
+            background: #f59e0b;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 25s;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%   { transform: translate(0, 0) scale(1); }
+            33%  { transform: translate(30px, -40px) scale(1.05); }
+            66%  { transform: translate(-20px, 20px) scale(0.95); }
+            100% { transform: translate(10px, -10px) scale(1.02); }
+        }
+
+        /* Glassmorphism card */
+        .glass {
+            background: rgba(30, 41, 59, 0.55);
+            backdrop-filter: blur(16px) saturate(1.4);
+            -webkit-backdrop-filter: blur(16px) saturate(1.4);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            box-shadow:
+                0 4px 6px -1px rgba(0, 0, 0, 0.3),
+                0 10px 30px -5px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-light {
+            background: rgba(30, 41, 59, 0.35);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.08);
+        }
+
+        /* Custom focus ring */
+        .input-field:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.4);
+            border-color: rgba(56, 189, 248, 0.5);
+        }
+
+        /* Smooth transitions for everything */
+        .transition-smooth {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Button glow */
+        .btn-primary {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            box-shadow: 0 4px 15px -3px rgba(14, 165, 233, 0.4);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px -3px rgba(14, 165, 233, 0.55);
+            transform: translateY(-1px);
+        }
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        /* Task card done state */
+        .task-done {
+            opacity: 0.5;
+        }
+        .task-done .task-title {
+            text-decoration: line-through;
+            color: #64748b;
+        }
+        .task-done .task-desc {
+            text-decoration: line-through;
+            color: #475569;
+        }
+
+        /* Fade-in animation */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        /* Stagger children */
+        .stagger > * {
+            opacity: 0;
+            animation: fadeInUp 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.2); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(148, 163, 184, 0.35); }
+    </style>
+</head>
+<body class="flex items-center justify-center p-4 antialiased">
+    <!-- Background orbs -->
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+
+    <!-- App root -->
+    <div id="app" class="w-full relative z-10"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
