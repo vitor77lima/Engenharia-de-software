@@ -1,0 +1,18 @@
+# settings.py
+WIDTH = 800
+HEIGHT = 600
+FPS = 60
+
+# Cores
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+YELLOW = (255, 255, 0)
+
+# Configurações do jogo
+PLAYER_SPEED = 5
+ASTEROID_SPEED_MIN = 2
+ASTEROID_SPEED_MAX = 5
+PROJECTILE_SPEED = -10
